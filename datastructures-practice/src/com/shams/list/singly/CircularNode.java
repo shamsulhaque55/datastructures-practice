@@ -13,8 +13,26 @@ public class CircularNode <T> {
 
 	@Override
 	public boolean equals(Object obj) {
-		//CircularNode<?> otherValue = (CircularNode<?>) obj;
-		boolean result = obj.equals(this.value);
+		boolean result = false;
+		if(obj instanceof Integer) {
+			Integer otherValue = (Integer) obj;
+			result =  otherValue.equals(this.value);
+		}
+		if(obj instanceof String) {
+			String otherValue = (String) obj;
+			result =  otherValue.equals(this.value);
+		}
+		
+		if(obj instanceof Float) {
+			Float otherValue = (Float) obj;
+			result =  otherValue.equals(this.value);
+		}
+		if(obj instanceof Double) {
+			Double otherValue = (Double) obj;
+			result =  otherValue.equals(this.value);
+		} else {
+			result = obj.equals(this.value);
+		}
 		return result;
 	}
 	
