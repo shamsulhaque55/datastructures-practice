@@ -5,7 +5,7 @@ public class CircularLinkedListApp {
 
 	public static void main(String[] args) throws Exception {
 		CircularLinkedListApp app = new CircularLinkedListApp();
-		/*app.appendNode("786");
+		app.appendNode("786");
 		app.appendNode(112);
 		app.appendNode("Hello");
 		app.appendNode("LOL");
@@ -14,9 +14,11 @@ public class CircularLinkedListApp {
 		app.appendNode("LEL");
 		app.appendNode("LUL");
 		System.out.println("Initial Values");
-		app.printNode();*/
+		app.printNode();
 		app.removeNode("LMFAO");
-	/*	System.out.println("\nAfter Delete"); */
+		app.removeNode("ROFL");
+		app.removeNode("pp");
+		System.out.println("\nAfter Delete");
 		app.printNode();
 	}
 
@@ -41,17 +43,29 @@ public class CircularLinkedListApp {
 			System.out.print("->"+temp.value);
 			temp = temp.next;
 		}
+		System.out.println();
 	}
 	
 	private <T> void removeNode(T value) throws Exception {
+		boolean dataFound = false;
 		if(head.next ==  null) {
 			throw new Exception("Attempt to remove node from empty list");
 		} else {
 			CircularNode<?> current = head.next;
-			while(current.next.next != head && current.next.equals(value)) {
+			while(current.next.next != head) {
+				if(current.next.equals(value)) {
+					dataFound = true;
+					break;
+				}
 				current = current.next;
 			}
-			current.next = current.next.next;
+			if(dataFound) {
+				current.next = current.next.next;
+				System.out.println("\nDeleted Data \""+value+"\"");
+			}
+			
+			else
+				System.out.println("\nData \""+value+"\" is not present");
 		}
 	}
 	
