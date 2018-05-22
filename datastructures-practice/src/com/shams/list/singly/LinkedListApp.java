@@ -34,24 +34,17 @@ public class LinkedListApp {
 	}
 	private void insertSorted(int val) {
 		Node newNode = new Node(val);
-		if(head.next == null) {
+		if(head.next == null || head.next.value >= val) {
+			newNode.next = head.next;
 			head.next = newNode;
 		} else {
 			Node last = head.next;
-			while(last != null) {
-				if(last.value >= val) {
-				Node temp = 	last;
-				last = newNode; 
-				newNode.next = temp;
-				head.next = last;
-				break;
-				} else if(last.value < val && last.next == null) {
-					last.next = newNode;
-					break;
-				} else {
-					last = last.next;
-				}
+			while(last.next != null && 
+					last.next.value < newNode.value) {
+				last = last.next;
 			}
+			newNode.next = last.next;
+			last.next = newNode;
 		}
 	}
 	private static int promptInput () {
