@@ -13,7 +13,15 @@ public class LinkedListApp {
 		app.insertSorted(1);
 		app.insertSorted(1);
 		app.insertSorted(100);
+		app.insertSorted(100);
+		app.insertSorted(0);
+		app.insertSorted(0);
+		app.insertSorted(0);
+		app.insertSorted(-1);
+		app.insertSorted(-1);
+		app.insertSorted(-2);
 		app.insertSorted(1);
+		app.insertSorted(10);
 		app.insertSorted(10);
 		app.insertSorted(1);
 		app.printList();
