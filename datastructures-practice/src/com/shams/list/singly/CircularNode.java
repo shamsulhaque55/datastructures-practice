@@ -1,14 +1,14 @@
 package com.shams.list.singly;
 
 public class CircularNode <T> {
-	
+
 	public CircularNode<?> next = null;
 	public T value;
-	
+
 	public CircularNode(T value) {
 		this.value = value;
 	}
-	
+
 	public CircularNode() {}
 
 	@Override
@@ -22,7 +22,7 @@ public class CircularNode <T> {
 			String otherValue = (String) obj;
 			result =  otherValue.equals(this.value);
 		}
-		
+
 		if(obj instanceof Float) {
 			Float otherValue = (Float) obj;
 			result =  otherValue.equals(this.value);
@@ -35,7 +35,14 @@ public class CircularNode <T> {
 		}
 		return result;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return value.toString();
+	}
+
+
+
+
 
 }

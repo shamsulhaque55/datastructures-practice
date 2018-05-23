@@ -5,26 +5,32 @@ import java.util.Scanner;
 public class LinkedListApp {
 	static Scanner sc = new Scanner(System.in);
 	Node head = new Node(-1);
+	int size = 0;
 	public static void main(String[] args) {
-		LinkedListApp app = new LinkedListApp();
-		app.insertSorted(3);
-		app.insertSorted(2);
-		app.insertSorted(1);
-		app.insertSorted(1);
-		app.insertSorted(1);
-		app.insertSorted(100);
-		app.insertSorted(100);
-		app.insertSorted(0);
-		app.insertSorted(0);
-		app.insertSorted(0);
-		app.insertSorted(-1);
-		app.insertSorted(-1);
-		app.insertSorted(-2);
-		app.insertSorted(1);
-		app.insertSorted(10);
-		app.insertSorted(10);
-		app.insertSorted(1);
-		app.printList();
+		LinkedListApp list1 = new LinkedListApp();
+		list1.insertSorted(3);
+		list1.insertSorted(2);
+		list1.insertSorted(1);
+		list1.insertSorted(1);
+		list1.insertSorted(1);
+		list1.insertSorted(100);
+		list1.insertSorted(100);
+		list1.insertSorted(0);
+		list1.insertSorted(0);
+		list1.printList("List 1");
+		LinkedListApp list2 = new LinkedListApp();
+		list2.insertSorted(0);
+		list2.insertSorted(-1);
+		list2.insertSorted(-1);
+		list2.insertSorted(-2);
+		list2.insertSorted(1);
+		list2.insertSorted(10);
+		list2.insertSorted(10);
+		list2.insertSorted(1);
+		list2.printList("List 2");
+		LinkedListApp list3 = new LinkedListApp();
+		list3.mergeSortedIntoOther(list1, list2);
+		list3.printList("List 1 + List2 ");
 		/*int inputs = 0;
 		while((inputs = promptInput()) > 0) {
 			LinkedListApp app = new LinkedListApp();
@@ -40,19 +46,60 @@ public class LinkedListApp {
 		}*/
 
 	}
+	private void mergeSortedToList(LinkedListApp list1, LinkedListApp list2) {}
+
+	private void mergeSortedIntoOther(LinkedListApp list1, LinkedListApp list2) {
+//		Node head1 = list1.head;
+//		Node head2 = list2.head;
+//		int longestListSize = 0;
+		Node longerNode;
+		Node shorterNode;
+		if(list1.size == 0 || list2.size == 0) {
+			return;
+		} else {
+			size = list1.size + list2.size;
+		}
+
+		if(list1.size >= list2.size ) {
+			longerNode = list1.head;
+			shorterNode = list1.head;
+		} else {
+			longerNode = list2.head;
+			shorterNode = list2.head;
+		}
+		Node currentShort = shorterNode.next;
+		while(currentShort.next != null) {
+			if(currentShort != null && longerNode.next.value >= currentShort.value) {
+				shorterNode = currentShort.next;
+				longerNode.next = currentShort;
+				currentShort.next = longerNode.next;
+			} else {
+				Node currentLong = longerNode.next;
+				while(currentLong.next != null && currentLong.next.value < currentShort.value) {
+					currentLong = currentLong.next;
+				}
+				currentLong.next = currentShort;
+				currentShort.next = currentLong;
+			}
+			currentShort = currentShort.next;
+		}
+		head = longerNode;
+	}
 	private void insertSorted(int val) {
 		Node newNode = new Node(val);
 		if(head.next == null || head.next.value >= val) {
 			newNode.next = head.next;
 			head.next = newNode;
+			size++;
 		} else {
 			Node last = head.next;
-			while(last.next != null && 
+			while(last.next != null &&
 					last.next.value < newNode.value) {
 				last = last.next;
 			}
 			newNode.next = last.next;
 			last.next = newNode;
+			size++;
 		}
 	}
 	private static int promptInput () {
@@ -71,19 +118,22 @@ public class LinkedListApp {
 				last = last.next;
 			}
 			last.next = newNode;
+			size++;
 		}
 		return head;
 	}
 
-	
-	private void printList() {
+
+	private void printList(String msg) {
+		System.out.print("\n"+msg);
 		if(head.next == null) {
 			System.out.println(head.value);
 		} else {
-			System.out.print("Values : ");
-			while(head.next != null) {
-				System.out.print(head.next.value +" ");
-				head.next = head.next.next;
+			System.out.print(" Values("+size+") : ");
+			Node temp = head.next;
+			while(temp != null) {
+				System.out.print(" -> "+temp.value);
+				temp = temp.next;
 			}
 		}
 	}

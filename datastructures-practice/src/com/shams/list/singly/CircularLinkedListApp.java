@@ -2,7 +2,7 @@ package com.shams.list.singly;
 
 public class CircularLinkedListApp {
 	CircularNode<?> head = new CircularNode<>(null);
-
+	private int size = 0;
 	public static void main(String[] args) throws Exception {
 		CircularLinkedListApp app = new CircularLinkedListApp();
 		app.appendNode("786");
@@ -15,10 +15,11 @@ public class CircularLinkedListApp {
 		app.appendNode("LUL");
 		System.out.println("Initial Values");
 		app.printNode();
-		app.removeNode(112);
-		app.removeNode("786");
-		System.out.println("\nAfter Delete");
-		app.printNode();
+		System.out.println("Found Value : "+app.getNode(3).toString());
+//		app.removeNode(112);
+//		app.removeNode("786");
+//		System.out.println("\nAfter Delete");
+//		app.printNode();
 	}
 
 	private <T> void appendNode(T value) {
@@ -26,6 +27,7 @@ public class CircularLinkedListApp {
 		if(head.next == null) {
 			head.next = newNode;
 			newNode.next = head;
+			size++;
 		} else {
 			CircularNode<?> current = head.next;
 			while(current.next != head) {
@@ -33,9 +35,10 @@ public class CircularLinkedListApp {
 			}
 			current.next = newNode;
 			newNode.next = head;
+			size ++;
 		}
 	}
-	
+
 	private <T> void printNode() {
 		CircularNode<?> temp = head.next;
 		while(temp != head) {
@@ -44,7 +47,7 @@ public class CircularLinkedListApp {
 		}
 		System.out.println();
 	}
-	
+
 	private <T> void removeNode(T value) throws Exception {
 		boolean dataFound = false;
 		if(head.next ==  null) {
@@ -60,18 +63,35 @@ public class CircularLinkedListApp {
 			}
 			if(dataFound) {
 				current.next = current.next.next;
+				size--;
 				System.out.println("\nDeleted Data \""+value+"\"");
 			}
 			else
 				System.out.println("\nData \""+value+"\" is not present");
 		}
 	}
-	
+
+	private <T> CircularNode<?> getNode(int pos) throws Exception {
+		if(size == 0 || pos > size) {
+			throw new Exception("Index Out of Bound");
+		} else {
+			int nodeCount = 0;
+			CircularNode<?> current = head.next;
+			while(current.next != head) {
+				if(nodeCount == pos) {
+					return current;
+				}
+				current = current.next;
+				nodeCount++;
+			}
+		}
+		return null;
+	}
 	/*private void removeNode(int pos) throws Exception {
 		if(head.next ==  null) {
 			throw new Exception("Attempt to remove node from empty list");
 		} else {
-			
+
 		}
 	}*/
 
