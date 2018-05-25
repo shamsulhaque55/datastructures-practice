@@ -62,24 +62,28 @@ public class LinkedListApp {
 
 		if(list1.size >= list2.size ) {
 			longerNode = list1.head;
-			shorterNode = list1.head;
+			shorterNode = list2.head;
 		} else {
 			longerNode = list2.head;
-			shorterNode = list2.head;
+			shorterNode = list1.head;
 		}
-		Node currentShort = shorterNode.next;
+		Node currentShort = shorterNode;
+		Node tempNode;
 		while(currentShort.next != null) {
 			if(currentShort != null && longerNode.next.value >= currentShort.value) {
-				shorterNode = currentShort.next;
-				longerNode.next = currentShort;
-				currentShort.next = longerNode.next;
+				tempNode = currentShort;
+				tempNode.next = longerNode.next;
+				longerNode.next = tempNode;
+				tempNode = null;
 			} else {
 				Node currentLong = longerNode.next;
 				while(currentLong.next != null && currentLong.next.value < currentShort.value) {
 					currentLong = currentLong.next;
 				}
-				currentLong.next = currentShort;
-				currentShort.next = currentLong;
+				tempNode = currentShort;
+				currentLong.next = tempNode;
+				tempNode.next = currentLong.next;
+				longerNode.next = tempNode;
 			}
 			currentShort = currentShort.next;
 		}
