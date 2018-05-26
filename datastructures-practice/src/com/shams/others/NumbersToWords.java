@@ -4,12 +4,12 @@ public class NumbersToWords {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(toWords(9999999999L));
+		//System.out.println(toWords(5000));
+		System.out.println(NumberToWords(3000));
 	}
 	// max : 9999999999
 	private static String toWords(long n) {
 		String words = "";
-		int calculatedUnit = 0;
 		String[] ones = new String[] {"Zero",
 				"One", "Tow", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
 				"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
@@ -55,5 +55,57 @@ public class NumbersToWords {
 		}
  		return words;
 	}
+	
+	static String unitsMap[] = { "zero", "one", "two", "three", "four", "five","six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+	static String tensMap[] = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+	static String NumberToWords(int number)
+	 {
+	  if (number == 0)
+	     return "zero";
+
+	 if (number < 0)
+	     return "minus " + NumberToWords((number));
+
+	 String words = "";
+
+	 if ((number / 1000000000) > 0)
+	 {
+	     words += NumberToWords(number / 1000000000) + " billion ";
+	     number %= 1000000000;
+	 }
+
+	 if ((number / 1000000) > 0)
+	 {
+	     words += NumberToWords(number / 1000000) + " million ";
+	     number %= 1000000;
+	 }
+
+	 if ((number / 1000) > 0)
+	 {
+	     words += NumberToWords(number / 1000) + " thousand ";
+	     number %= 1000;
+	 }
+
+	 if ((number / 100) > 0)
+	 {
+	     words += NumberToWords(number / 100) + " hundred ";
+	     number %= 100;
+	 }
+
+	 if (number > 0)
+	 {
+	     if (number < 20)
+	         words += unitsMap[number];
+	     else
+	     {
+	         words += tensMap[number / 10];
+	         if ((number % 10) > 0)
+	             words += "-" + unitsMap[number % 10];
+	     }
+	 }
+
+	 return words;
+	  }
 
 }
