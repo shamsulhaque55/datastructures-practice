@@ -5,13 +5,13 @@ public class NumbersToWords {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//System.out.println(toWords(5000));
-		System.out.println(NumberToWords(3000));
+		System.out.println(toWords(1000000000));
 	}
 	// max : 9999999999
 	private static String toWords(long n) {
 		String words = "";
 		String[] ones = new String[] {"Zero",
-				"One", "Tow", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+				"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
 				"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
 				"Seventeen", "Eighteen", "Nineteen",
 				"Twenty", "Thirty", "Fourty", "Fifty", "Sixty", "Svenety", "Eighty", "Ninety"
@@ -27,10 +27,10 @@ public class NumbersToWords {
 		} else if(n == 0 && words.length() == 0) {
 			words = ones[0];
 		}else {
-			if (n >= 100000000000L) {
+			if ((long)n >= 100000000000L) {
 				return "Out of range";
 			}
-			if (n < 100000000000L && n > 1000000000L) {
+			if (n < 100000000000L && n >= 1000000000L) {
 				//Arab
 				words = words +  toWords((int) (n/1000000000L))+ " Arab" +" " + toWords(n % 1000000000L);
 

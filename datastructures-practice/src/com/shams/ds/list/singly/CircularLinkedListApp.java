@@ -1,4 +1,4 @@
-package com.shams.list.singly;
+package com.shams.ds.list.singly;
 
 public class CircularLinkedListApp {
 	CircularNode<?> head = new CircularNode<>(null);

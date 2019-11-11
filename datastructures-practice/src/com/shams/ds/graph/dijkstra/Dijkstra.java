@@ -1,4 +1,4 @@
-package com.shams.graph.dijkstra;
+package com.shams.ds.graph.dijkstra;
 
 import java.util.Scanner;
 
