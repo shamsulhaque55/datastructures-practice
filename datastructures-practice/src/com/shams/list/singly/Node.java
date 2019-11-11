@@ -14,7 +14,7 @@ public class Node {
 		this.next = null;
 	}
 	/**
-	 *  Default Contructor
+	 *  Default Constructor
 	 */
 	public Node() {
 	}

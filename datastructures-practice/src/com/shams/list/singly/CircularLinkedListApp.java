@@ -48,6 +48,7 @@ public class CircularLinkedListApp {
 		System.out.println();
 	}
 
+	@SuppressWarnings("unused")
 	private <T> void removeNode(T value) throws Exception {
 		boolean dataFound = false;
 		if(head.next ==  null) {
