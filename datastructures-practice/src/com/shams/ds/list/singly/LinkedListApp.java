@@ -8,24 +8,24 @@ public class LinkedListApp {
 	int size = 0;
 	public static void main(String[] args) {
 		LinkedListApp list1 = new LinkedListApp();
-		list1.insertSorted(9);
-		list1.insertSorted(9);
-		list1.insertSorted(9);
-		list1.insertSorted(9);
-		list1.insertSorted(9);
-		list1.insertSorted(9);
+		list1.insertSorted(5);
+//		list1.insertSorted(9);
+//		list1.insertSorted(9);
+//		list1.insertSorted(9);
+//		list1.insertSorted(9);
+//		list1.insertSorted(9);
 //		list1.insertSorted(100);
 //		list1.insertSorted(100);
 //		list1.insertSorted(0);
 //		list1.insertSorted(0);
 		list1.printList("List 1");
 		LinkedListApp list2 = new LinkedListApp();
-		list2.insertSorted(0);
-		list2.insertSorted(1);
-		list2.insertSorted(1);
-		list2.insertSorted(2);
-		list2.insertSorted(1);
-		list2.insertSorted(9);
+		list2.insertSorted(5);
+//		list2.insertSorted(1);
+//		list2.insertSorted(1);
+//		list2.insertSorted(2);
+//		list2.insertSorted(1);
+//		list2.insertSorted(9);
 //		list2.insertSorted(10);
 //		list2.insertSorted(10);
 //		list2.insertSorted(1);
@@ -33,7 +33,7 @@ public class LinkedListApp {
 		LinkedListApp list3 = new LinkedListApp();
 		//list3.printList(list3.mergeSortedToList(list1.head, list2.head), "Merged");
 		
-		list3.printList(list3.addTwoList(list1.head, list2.head), "Summed");
+		list3.printList(list3.addTwoList(list1.head.next, list2.head.next), "Summed");
 		/*int inputs = 0;
 		while((inputs = promptInput()) > 0) {
 			LinkedListApp app = new LinkedListApp();
@@ -64,25 +64,39 @@ public class LinkedListApp {
 		}
 	}
 	
+	/*
+	 * private Node addTwoList (Node l1, Node l2) { if(l1 == null) return l2; if(l2
+	 * == null) return l1;
+	 * 
+	 * int carry = 0; int sum = l1.value + l2.value + carry; if(l1.next != null ||
+	 * l2.next != null) { carry = sum / 10; sum = sum % 10; } l1.value = sum;
+	 * if(l1.next != null) { l1.next.value += carry; } else {
+	 * 
+	 * } l1.next = addTwoList(l1.next, l2.next); return l1;
+	 * 
+	 * }
+	 */
+	
+	// for leet code,  5 + 5 = 0 1
 	private Node addTwoList (Node l1, Node l2) {
 		if(l1 == null) return l2;
 		if(l2 == null) return l1;
-		
+		Node sumNode =  new Node(-1);
 		int  carry = 0;
-		int sum = l1.value + l2.value + carry;
-	    if(l1.next != null || l2.next != null) {
-	    	carry = sum / 10;
-	    	sum = sum % 10;
-	    } 
-	    l1.value = sum;
-	    if(l1.next != null) {
-	    	l1.next.value += carry;
-	    } else {
-	    	
-	    }
-	    l1.next = addTwoList(l1.next, l2.next);
-		return l1;
 		
+		Node t = sumNode; 		
+		while (l1 != null || l2 != null || carry > 0) {
+			int a = l1 != null ? l1.value : 0;
+			int b = l2 != null ? l2.value : 0;
+			int sum = a + b + carry;
+			carry = sum / 10;
+	    	sum = sum % 10;
+			t.next = new Node(sum);
+			t = t.next;
+			l1 = l1 != null ? l1.next : null;
+			l2 = l2 != null ? l2.next : null;
+		}
+		return sumNode;
 	}
 
 
